@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/bootstrap";
+
+.labels{
+    margin-top: 5%;
+}
+
+.divisoria{
+    width: 100%;
+    height: 1px;
+    background: #ccc;
+}

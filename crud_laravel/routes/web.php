@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ShowUsersController;
+use App\Http\Controllers\EditaUsuarioController;
+use App\Http\Controllers\CriaUsuarioController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [ShowUsersController::class, 'showUser']);
+Route::get('/editar-usuario', [EditaUsuarioController::class, 'updateUser']);
+Route::get('/novo-usuario', [CriaUsuarioController::class, 'viewNewUser']);
