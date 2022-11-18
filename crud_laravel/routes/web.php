@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ShowUsersController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EditaUsuarioController;
 use App\Http\Controllers\CriaUsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [ShowUsersController::class, 'showUser']);
-Route::get('/editar-usuario', [EditaUsuarioController::class, 'updateUser']);
-Route::get('/novo-usuario', [CriaUsuarioController::class, 'viewNewUser']);
+Route::get('/', [UsersController::class, 'showUser']);
+Route::get('/novo-usuario', [UsersController::class, 'viewNewUser']);
+Route::post('/criar-novo-usuario', [UsersController::class, 'storeUser']);
+Route::get('/editar-usuario/{id}', [UsersController::class, 'updateUser']);
+Route::put('/salvar-usuario/{id}', [UsersController::class, 'saveUser']);
+Route::delete('/deletar-usuario/{id}', [UsersController::class, 'destroyUser']);
+
