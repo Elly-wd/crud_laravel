@@ -24,7 +24,9 @@ class UsersController extends Controller
     
     //cadastrar um novo usuario no banco
     public function storeUser(Request $request)
-    {   $usuario = new User();
+    {   
+    
+        $usuario = new User();
 
         $usuario->Nome = $request->Nome;
         $usuario->Email = $request->Email;
@@ -33,7 +35,7 @@ class UsersController extends Controller
 
         $usuario->save();
 
-        return redirect('/');
+        return redirect('/')->response()->json(['success'=>'Successfully']);
 
     }
     
