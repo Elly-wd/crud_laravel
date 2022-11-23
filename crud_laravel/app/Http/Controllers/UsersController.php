@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 
 class UsersController extends Controller
@@ -25,18 +26,32 @@ class UsersController extends Controller
     //cadastrar um novo usuario no banco
     public function storeUser(Request $request)
     {   
-    
-        $usuario = new User();
 
-        $usuario->Nome = $request->Nome;
-        $usuario->Email = $request->Email;
-        $usuario->Data_Nascimento = $request->Data_Nascimento;
-        $usuario->Senha = $request->Senha;
+        $validacao = Validator::make($request->all(), [
+            'nome' => 'required',
+            'email' => 'required',
+            'senha' => 'required',
+        ]);
 
-        $usuario->save();
+        if ($validacao->fails()) {
+            return response()->json([
+                        'error' => $validacao->errors()->all()
+                    ]);
+        }else{
 
-        return redirect('/')->response()->json(['success'=>'Successfully']);
+        
 
+            $usuario = new User();
+
+            $usuario->Nome = $request->nome;
+            $usuario->Email = $request->email;
+            $usuario->Data_Nascimento = $request->data;
+            $usuario->Senha = $request->senha;
+
+            $usuario->save();
+
+            return response()->json(['success'=>'Form is successfully submitted!']);
+        }
     }
     
     //redireciona para pagina de atualizacao
