@@ -65,9 +65,15 @@ class UsersController extends Controller
     //sava as alteracoes no banco
     public function saveUser(Request $request)
     {
+      
         $usuario = User::findOrFail($request->id)->update($request->all());
 
-       return redirect('/')->with('msg', 'Usuário alterado com sucesso!');
+        if ($usuario == true) {
+            return response()->json(['success'=>'Form is successfully submitted!']);
+        }else{
+            return response()->json(['error'=>'Form is not submitted!']);
+
+        }   
     }
 
     //deleta o usuario
