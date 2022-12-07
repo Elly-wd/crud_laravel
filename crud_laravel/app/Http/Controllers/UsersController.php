@@ -49,10 +49,10 @@ class UsersController extends Controller
         }else{*/
             $usuario = new User();
 
-            $usuario->Nome = $request->nome;
-            $usuario->Email = $request->email;
-            $usuario->Data_Nascimento = $request->data;
-            $usuario->Senha = $request->senha;
+            $usuario->Nome = $request->Nome;
+            $usuario->Email = $request->Email;
+            $usuario->Data_Nascimento = $request->Data_Nascimento;
+            $usuario->Senha = $request->Senha;
 
             $usuario->save();
 
@@ -64,13 +64,12 @@ class UsersController extends Controller
     public function updateUser(Request $request)
     {
         $usuario = User::findOrFail($request->id);
-        $usuario->Nome = $request->nome;
-        $usuario->Email = $request->email;
-        $usuario->Data_Nascimento = $request->data;
-        $usuario->Senha = $request->senha;
+        $usuario->Nome = $request->Nome;
+        $usuario->Email = $request->Email;
+        $usuario->Data_Nascimento = $request->Data_Nascimento;
+        $usuario->Senha = $request->Senha;
         $usuario->save();
 
-        dd($usuario->save());
         if ($usuario) {
             return redirect('/')->with('msg', 'Usuário editado');
         }else{

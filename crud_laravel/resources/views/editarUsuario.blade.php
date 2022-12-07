@@ -9,15 +9,11 @@
         @method('PUT')
         @csrf
         
-        @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-        @endif
         <div class="row">
             <div class="col-4">
-                <!--<input type="hidden" name="_method" value="PUT" />-->
-                <input type="hidden" name="_token" id='idUsuario' value="{{$usuario->id}}" />
+                <input type="hidden" name="_token" id='token' value="{{ csrf_token() }}" />
+                <input type="hidden" name="_method" value="PUT" />
+                <input type="hidden" name="usuarioId" id='idUsuario' value="{{$usuario->id}}" />
                 <input type="text" class="form-control" id="novoNome" name="Nome" placeholder="Nome" value="{{$usuario->Nome}}" required>
                 <input type="text" class="form-control labels" id="novoEmail" name="Email" placeholder="Email" value="{{$usuario->Email}}" required>
             </div>
