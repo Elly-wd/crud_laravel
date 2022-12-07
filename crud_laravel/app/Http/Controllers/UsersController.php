@@ -9,25 +9,34 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
-    //mostar todos os usuarios cadastrados
-    public function showUser()
+    //View da Home
+    public function viewShowUser()
     {
         $users = User::all();
         
         return view('usuarios',['users' => $users]);
     }
     
+    //View de cadastro
     public function viewNewUser()
     {
         return view('novoUsuario');
 
     }
     
+    //View de atualizacao de dados
+    public function viewUpdateUser($id)
+    {
+        $usuario = User::findOrFail($id);
+
+        return view('editarUsuario', ['usuario' =>$usuario]);
+    }
+
     //cadastrar um novo usuario no banco
     public function storeUser(Request $request)
     {   
 
-        $validacao = Validator::make($request->all(), [
+        /*$validacao = Validator::make($request->all(), [
             'nome' => 'required',
             'email' => 'required',
             'senha' => 'required',
@@ -37,10 +46,7 @@ class UsersController extends Controller
             return response()->json([
                         'error' => $validacao->errors()->all()
                     ]);
-        }else{
-
-        
-
+        }else{*/
             $usuario = new User();
 
             $usuario->Nome = $request->nome;
@@ -50,28 +56,25 @@ class UsersController extends Controller
 
             $usuario->save();
 
-            return response()->json(['success'=>'Form is successfully submitted!']);
-        }
+            return redirect('/')->with('msg', 'Usuário criado');
     }
     
-    //redireciona para pagina de atualizacao
-    public function updateUser($id)
-    {
-        $usuario = User::findOrFail($id);
-
-       return view('editarUsuario', ['usuario' =>$usuario]);
-    }
 
     //sava as alteracoes no banco
-    public function saveUser(Request $request)
+    public function updateUser(Request $request)
     {
-      
-        $usuario = User::findOrFail($request->id)->update($request->all());
+        $usuario = User::findOrFail($request->id);
+        $usuario->Nome = $request->nome;
+        $usuario->Email = $request->email;
+        $usuario->Data_Nascimento = $request->data;
+        $usuario->Senha = $request->senha;
+        $usuario->save();
 
-        if ($usuario == true) {
-            return response()->json(['success'=>'Form is successfully submitted!']);
+        dd($usuario->save());
+        if ($usuario) {
+            return redirect('/')->with('msg', 'Usuário editado');
         }else{
-            return response()->json(['error'=>'Form is not submitted!']);
+            
 
         }   
     }

@@ -9,7 +9,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#salvar').on('click',function(e) {
+    $('#').on('click',function(e) {
        
         e.preventDefault();
 
@@ -50,7 +50,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#editarUsuario').on('click',function(e) {
+    $('#').on('click',function(e) {
        
         e.preventDefault();
 
@@ -62,10 +62,10 @@ $(document).ready(function() {
 
         $.ajax({
             url: `/salvar-usuario/${idUsuario}`,
-            type: 'PUT',
+            type: 'POST',
             dataType:'json',
             data:{
-              //  token: token,
+                id: idUsuario,
                 nome:Nnome,
                 email:Nemail,
                 data:Ndata,
@@ -74,8 +74,9 @@ $(document).ready(function() {
 
             success: function() {
             },
-            error: function(error) {
+            error: function(error, data) {
                 alert(error)
+                console.log(data);
             }
         });
 

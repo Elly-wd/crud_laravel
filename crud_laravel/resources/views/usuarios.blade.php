@@ -43,7 +43,7 @@
             </div>
             
         </div>
-       
+       <br>
     @endforeach
     <div class="row labels">
         <div class="col-12">

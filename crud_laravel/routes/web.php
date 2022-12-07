@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [UsersController::class, 'showUser']);
+Route::get('/', [UsersController::class, 'viewShowUser']);
 Route::get('/novo-usuario', [UsersController::class, 'viewNewUser']);
 Route::post('/criar-novo-usuario', [UsersController::class, 'storeUser']);
-Route::get('/editar-usuario/{id}', [UsersController::class, 'updateUser']);
-Route::put('/salvar-usuario/{id}', [UsersController::class, 'saveUser']);
+Route::get('/editar-usuario/{id}', [UsersController::class, 'viewUpdateUser']);
+Route::put('/salvar-usuario/{id}', [UsersController::class, 'updateUser']);
 Route::delete('/deletar-usuario/{id}', [UsersController::class, 'destroyUser']);
 
